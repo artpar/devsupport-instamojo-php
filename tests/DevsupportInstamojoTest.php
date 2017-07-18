@@ -13,6 +13,32 @@ use PHPUnit\Framework\TestCase;
 
 class DevsupportInstamojoTest extends TestCase
 {
+  private $apiKey = "dNo97yFf7nDcq0QeYElTR5qvpnCssXpFr6BrBU2i";
+  private $apiSecret = "WttpIlEcGCZVTmQWxkpff0ssQH2BkICAaK0ip0HoB998OKXoUMq4hJfpaccSiTkcUieMNIY826o3MOSKMgqkuspoizMTunLcLiqqgPdihQY885wafIn1JMBLzwtYPEIY";
+
+  private $salt = "07c7cd4e440d4e978b9ed5f3392b2011";
+
+  public function testWebHookResponse()
+  {
+    $client = new InstamojoClient($this->apiKey, $this->apiSecret, $this->salt, "http://localhost:8880/instamojo_server.php?action=redirect", "http://someplace.else:8880/instamojo_server.php?action=notify", "test");
+
+    $params = array(
+      "amount" => "9.00",
+      "buyer" => "artpar@gmail.com",
+      "currency" => "INR",
+      "fees" => "0.17",
+      "longurl" => "https://test.instamojo.com/@artpar/015d159975c0476dab162f507afa9abf",
+      "purpose" => "rest",
+      "shorturl" => "",
+      "status" => "Credit",
+      "mac" => "ad2a6ad9961ba0c0d14cc072fbe8010af040739b",
+      "buyer_name" => "Parth",
+      "buyer_phone" => "+919686989921",
+      "payment_id" => "MOJO9989784500079690",
+      "payment_request_id" => "015d159975c0476dab162f507afa9abf",
+    );
+    $this->assertTrue($client->validateWebHookCall($params), "Hash check failed");
+  }
 
 
   /**

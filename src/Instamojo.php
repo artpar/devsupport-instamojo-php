@@ -8,13 +8,15 @@ class InstamojoClient
 
   private $apiKey;
   private $apiSecret;
+  private $salt;
   private $token;
 
 
-  public function __construct($apiKey, $apiSecret, $redirectUri = "http://localhost:8880/instamojo_server.php?action=redirect", $notifyUri = "http://someplace.com/instamojo_server.php?action=notify", $env = "test")
+  public function __construct($apiKey, $apiSecret, $salt, $redirectUri = "http://localhost:8880/instamojo_server.php?action=redirect", $notifyUri = "http://someplace.com/instamojo_server.php?action=notify", $env = "test")
   {
     $this->apiKey = $apiKey;
     $this->apiSecret = $apiSecret;
+    $this->salt = $salt;
     $this->redirectUri = $redirectUri;
     $this->notifyUri = $notifyUri;
     $this->env = $env;
@@ -74,6 +76,27 @@ class InstamojoClient
     );
   }
 
+
+  public function validateWebHookCall($data)
+  {
+    $mac_provided = $data['mac'];  // Get the MAC from the POST data
+    unset($data['mac']);  // Remove the MAC key from the data.
+    $ver = explode('.', phpversion());
+    $major = (int)$ver[0];
+    $minor = (int)$ver[1];
+    if ($major >= 5 and $minor >= 4) {
+      ksort($data, SORT_STRING | SORT_FLAG_CASE);
+    } else {
+      uksort($data, 'strcasecmp');
+    }
+// You can get the 'salt' from Instamojo's developers page(make sure to log in first): https://www.instamojo.com/developers
+// Pass the 'salt' without <>
+    $mac_calculated = hash_hmac("sha1", implode("|", $data), $this->salt);
+    echo "Given hash: " . $mac_provided . "\n";
+    echo "Calculated hash: " . $mac_calculated . "\n";
+    return $mac_provided == $mac_calculated;
+
+  }
 
   public function NewTransaction($params)
   {
