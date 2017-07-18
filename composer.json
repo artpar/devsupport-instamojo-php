@@ -1,9 +1,9 @@
 {
-  "name": "devsupport/instamojo-php",
+  "name": "devsupport/devsupport-instamojo-php",
   "type": "library",
-  "description": "This is composer wrapper for instamojo-php",
+  "description": "This is composer wrapper for instamojo v2 api for creating payment and handling notify and redirect calls",
   "license": "MIT",
-  "homepage": "https://github.com/devsupport/instamojo-php",
+  "homepage": "https://github.com/devsupport/devsupport-instamojo-php",
   "keywords": [
     "instamojo",
     "php",
@@ -12,9 +12,9 @@
   ],
   "authors": [
     {
-      "name": "Instamojo and contributors",
-      "email": "dev@instamojo.com",
-      "homepage": "https://github.com/instamojo/instamojo-php/contributors"
+      "name": "Parth Mudgal",
+      "email": "parth@devsupport.ai",
+      "homepage": "https://github.com/artpar/devsupport-instamojo-php"
     }
   ],
   "require": {
@@ -35,8 +35,8 @@
     }
   },
   "support": {
-    "issues": "https://github.com/instamojo/instamojo-php/issues",
-    "docs": "https://github.com/instamojo/instamojo-php/",
-    "email": "support@instamojo.com"
+    "issues": "https://github.com/artpar/devsupport-instamojo-php/issues",
+    "docs": "https://github.com/artpar/devsupport-instamojo-php/",
+    "email": "support@devsupport.ai"
   }
 }
