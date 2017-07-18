@@ -18,29 +18,12 @@ if ($action == "new_transaction") {
     'phone' => $_GET["phone"],
     'purpose' => $_GET["purpose"],
   );
-//  var_dump($params);
-
   echo json_encode($client->NewTransaction($params));
 } else if ($action == "handle_redirect") {
-  echo json_encode($_REQUEST);
-
-//  amount	9.00
-//buyer	artpar@gmail.com
-//currency	INR
-//fees	0.17
-//longurl	https://test.instamojo.com/@artpar/015d159975c0476dab162f507afa9abf
-//purpose	rest
-//shorturl
-//status	Credit
-//mac	1d2bb5e03bb645a0a03d97abdeab1f7d6863ee5a
-//buyer_name	Parth
-//buyer_phone	+919686989921
-//payment_id	MOJO1027807067601719
-//payment_request_id	015d159975c0476dab162f507afa9abf
-//
-  $validatedResponse = $client->validateWebHookCall($_POST);
+  $params = $_POST;
+  $validatedResponse = $client->validateWebHookCall($params);
   if ($validatedResponse) {
-    if ($params["status"] == "credit") {
+    if ($_POST["status"] == "credit") {
       echo "Payment success";
     } else {
       echo "Payment Failed";
