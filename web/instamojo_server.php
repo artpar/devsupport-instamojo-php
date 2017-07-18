@@ -22,5 +22,5 @@ if ($action == "new_transaction") {
 
   echo json_encode($client->NewTransaction($params));
 } else if ($action == "handle_redirect") {
-  echo json_encode($_GET);
+  echo json_encode($_REQUEST);
 }
