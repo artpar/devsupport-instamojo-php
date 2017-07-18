@@ -1,0 +1,42 @@
+{
+  "name": "devsupport/instamojo-php",
+  "type": "library",
+  "description": "This is composer wrapper for instamojo-php",
+  "license": "MIT",
+  "homepage": "https://github.com/devsupport/instamojo-php",
+  "keywords": [
+    "instamojo",
+    "php",
+    "api",
+    "wrapper"
+  ],
+  "authors": [
+    {
+      "name": "Instamojo and contributors",
+      "email": "dev@instamojo.com",
+      "homepage": "https://github.com/instamojo/instamojo-php/contributors"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "instamojo/instamojo-php": "^0.3.0",
+    "phpunit/phpunit": "^6.2"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "classmap": [
+      "src",
+      "tests"
+    ],
+    "psr-4": {
+      "Devsupport\\Client\\": "src/",
+      "Devsupport\\Tests\\": "tests/"
+    }
+  },
+  "support": {
+    "issues": "https://github.com/instamojo/instamojo-php/issues",
+    "docs": "https://github.com/instamojo/instamojo-php/",
+    "email": "support@instamojo.com"
+  }
+}
