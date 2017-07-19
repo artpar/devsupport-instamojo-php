@@ -2,10 +2,10 @@
 
 include "../src/Instamojo.php";
 
-const apiKey = "dNo97yFf7nDcq0QeYElTR5qvpnCssXpFr6BrBU2i";
-const apiSecret = "WttpIlEcGCZVTmQWxkpff0ssQH2BkICAaK0ip0HoB998OKXoUMq4hJfpaccSiTkcUieMNIY826o3MOSKMgqkuspoizMTunLcLiqqgPdihQY885wafIn1JMBLzwtYPEIY";
-const salt = "07c7cd4e440d4e978b9ed5f3392b2011";
-$client = new Devsupport\Client\InstamojoClient(apiKey, apiSecret, salt, "http://localhost:8880/instamojo_server.php?action=redirect", "http://someplace.else:8880/instamojo_server.php?action=notify", "test");
+const apiKey = "Mze9rTwbtR7HVDjMD9LXJiTXwSKiA09w0MpfOkZA";
+const apiSecret = "qLc7tBpbqoxbjdZ9UiZ1oa2ZObKSHDPENXzI1e5ePxo67HWcg4Z62jiOTaE6tVDWJ2cCbdqZz8fvByFm0yQltr7QYT4t2NMm4WKb6KEi7qIpNAzmXEjcfClGyOeGamtL";
+const salt = "7c9c3a0b92f14ae791a27912cc6ae63e";
+$client = new Devsupport\Client\InstamojoClient(apiKey, apiSecret, salt, "https://frozen-reef-67391.herokuapp.com/instamojo_server.php?action=handle_redirect", "https://frozen-reef-67391.herokuapp.com/instamojo_server.php?action=handle_redirect", "api");
 
 $action = $_GET["action"];
 
