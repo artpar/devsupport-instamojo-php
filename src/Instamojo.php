@@ -109,11 +109,11 @@ class InstamojoClient
     if (!isset($paymentRequest->id)) {
       throw new \Exception(json_encode($paymentRequest));
     }
-    $order = $this->createOrder($paymentRequest->id, $params["buyer_name"], $params["phone"], $token);
+//    $order = $this->createOrder($paymentRequest->id, $params["buyer_name"], $params["phone"], $token);
     return array(
       "transaction_id" => $txn,
       "payment_request" => $paymentRequest,
-      "order" => $order,
+//      "order" => $order,
       "token" => $token,
     );
   }
