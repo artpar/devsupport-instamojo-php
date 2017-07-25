@@ -100,7 +100,6 @@ class InstamojoClient
 
   public function NewTransaction($params)
   {
-//    echo "New transaction for " . $params["email"];
     $txn = $this->NewTransactionId();
 //    echo "New transaction id " . $txn;
 
