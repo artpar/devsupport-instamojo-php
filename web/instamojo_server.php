@@ -6,7 +6,7 @@ const salt = "07c7cd4e440d4e978b9ed5f3392b2011";
 const redirectUrl = "http://google.com";
 const notifyUrl = "http://google.com";
 
-
+namespace Sp1\Sp2;
 
 class InstamojoClient
 {
@@ -153,7 +153,7 @@ class InstamojoClient
 
 
 
-$client = new InstamojoClient(apiKey, apiSecret, salt, redirectUrl, notifyUrl, "api");
+$client = new Sp1\Sp2\InstamojoClient(apiKey, apiSecret, salt, redirectUrl, notifyUrl, "api");
 $action = $_GET["action"];
 if ($action == "new_transaction") {
   $params = array(
