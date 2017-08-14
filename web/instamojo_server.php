@@ -7,9 +7,6 @@ const redirectUrl = "http://google.com";
 const notifyUrl = "http://google.com";
 
 
-<?php
-
-
 
 class InstamojoClient
 {
