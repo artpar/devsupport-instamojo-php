@@ -1,7 +1,5 @@
 <?php
 
-namespace Sp1\Sp2;
-
 const apiKey = "dNo97yFf7nDcq0QeYElTR5qvpnCssXpFr6BrBU2i";
 const apiSecret = "WttpIlEcGCZVTmQWxkpff0ssQH2BkICAaK0ip0HoB998OKXoUMq4hJfpaccSiTkcUieMNIY826o3MOSKMgqkuspoizMTunLcLiqqgPdihQY885wafIn1JMBLzwtYPEIY";
 const salt = "07c7cd4e440d4e978b9ed5f3392b2011";
@@ -154,7 +152,7 @@ class InstamojoClient
 
 
 
-$client = new Sp1\Sp2\InstamojoClient(apiKey, apiSecret, salt, redirectUrl, notifyUrl, "api");
+$client = new InstamojoClient(apiKey, apiSecret, salt, redirectUrl, notifyUrl, "api");
 $action = $_GET["action"];
 if ($action == "new_transaction") {
   $params = array(
