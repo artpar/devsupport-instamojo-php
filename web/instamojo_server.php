@@ -1,12 +1,13 @@
 <?php
 
+namespace Sp1\Sp2;
+
 const apiKey = "dNo97yFf7nDcq0QeYElTR5qvpnCssXpFr6BrBU2i";
 const apiSecret = "WttpIlEcGCZVTmQWxkpff0ssQH2BkICAaK0ip0HoB998OKXoUMq4hJfpaccSiTkcUieMNIY826o3MOSKMgqkuspoizMTunLcLiqqgPdihQY885wafIn1JMBLzwtYPEIY";
 const salt = "07c7cd4e440d4e978b9ed5f3392b2011";
 const redirectUrl = "http://google.com";
 const notifyUrl = "http://google.com";
 
-namespace Sp1\Sp2;
 
 class InstamojoClient
 {
