@@ -77,8 +77,8 @@ class InstamojoClient
 // You can get the 'salt' from Instamojo's developers page(make sure to log in first): https://www.instamojo.com/developers
 // Pass the 'salt' without <>
     $mac_calculated = hash_hmac("sha1", implode("|", $data), $this->salt);
-    echo "Given hash: " . $mac_provided . "\n";
-    echo "Calculated hash: " . $mac_calculated . "\n";
+//    echo "Given hash: " . $mac_provided . "\n";
+//    echo "Calculated hash: " . $mac_calculated . "\n";
     return $mac_provided == $mac_calculated;
   }
   public function NewTransaction($params)
