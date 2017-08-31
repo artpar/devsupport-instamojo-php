@@ -4,8 +4,8 @@
 const apiKey = "S2kNEkAgnz3SdpkCR5vEQnNsAhXXdobK5Ziq6x4e";
 const apiSecret = "3Z7RJ6Gx7ePQkKdekpqG0iV6l7TEGIkeWAJP1TNshwh5lo2ANlSh49fMGau3SUqzM3FmYNFW3cqcoVqU4XF65YfKj0OduA3ZGCU4Kj7ramVMDRaet30QAc5wjpPozzJ3";
 const salt = "788239714ee94f2aaa5d85fc609eaa00";
-const redirectUrl = "undefined";
-const notifyUrl = "undefined";
+const redirectUrl = "https://frozen-reef-67391.herokuapp.com/peach_redirect.php";
+const notifyUrl = "https://frozen-reef-67391.herokuapp.com/peach_redirect.php";
 
 class InstamojoClient
 {
