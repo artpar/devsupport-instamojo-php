@@ -1,8 +1,8 @@
 
 <?php
 
-const apiKey = "undefined";
-const apiSecret = "undefined";
+const apiKey = "S2kNEkAgnz3SdpkCR5vEQnNsAhXXdobK5Ziq6x4e";
+const apiSecret = "3Z7RJ6Gx7ePQkKdekpqG0iV6l7TEGIkeWAJP1TNshwh5lo2ANlSh49fMGau3SUqzM3FmYNFW3cqcoVqU4XF65YfKj0OduA3ZGCU4Kj7ramVMDRaet30QAc5wjpPozzJ3";
 const salt = "788239714ee94f2aaa5d85fc609eaa00";
 const redirectUrl = "undefined";
 const notifyUrl = "undefined";
@@ -160,4 +160,3 @@ $params = array(
   'webhook' => notifyUrl,
 );
 echo json_encode($client->NewTransaction($params));
-
