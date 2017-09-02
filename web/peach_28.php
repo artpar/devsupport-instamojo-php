@@ -12,7 +12,7 @@ $data = "authentication.userId=8a8294185dbc881e015deeee63307a5c" .
   "&amount=" . $amount .
   "&currency=" . $currency .
   "&paymentType=" . $type .
-  "&shopperResultUrl=http://devsupport.ai" .
+  "&shopperResultUrl=devsupport://callback" .
   "&notificationUrl=https://frozen-reef-67391.herokuapp.com/instamojo_server.php";
 
 $ch = curl_init();
