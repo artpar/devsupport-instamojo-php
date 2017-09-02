@@ -151,11 +151,11 @@ class InstamojoClient
 $client = new InstamojoClient(apiKey, apiSecret, salt, "api");
 
 $params = array(
-  'buyer_name' => $_GET["name"],
-  'email' => $_GET["email"],
-  'amount' => $_GET["amount"],
-  'phone' => $_GET["phone"],
-  'purpose' => $_GET["purpose"],
+  'buyer_name' => $_POST["name"],
+  'email' => $_POST["email"],
+  'amount' => $_POST["amount"],
+  'phone' => $_POST["phone"],
+  'purpose' => $_POST["purpose"],
   'redirect_url' => redirectUrl,
   'webhook' => notifyUrl,
 );
