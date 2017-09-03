@@ -157,7 +157,6 @@ if ($validatedResponse) {
     echo "Payment Failed";
   }
 } else {
-    echo "Failed";
 }
 
 
