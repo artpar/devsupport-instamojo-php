@@ -4,8 +4,8 @@
 const apiKey = "S2kNEkAgnz3SdpkCR5vEQnNsAhXXdobK5Ziq6x4e";
 const apiSecret = "3Z7RJ6Gx7ePQkKdekpqG0iV6l7TEGIkeWAJP1TNshwh5lo2ANlSh49fMGau3SUqzM3FmYNFW3cqcoVqU4XF65YfKj0OduA3ZGCU4Kj7ramVMDRaet30QAc5wjpPozzJ3";
 const salt = "788239714ee94f2aaa5d85fc609eaa00";
-const redirectUrl = "https://frozen-reef-67391.herokuapp.com/peach_redirect.php";
 const notifyUrl = "https://frozen-reef-67391.herokuapp.com/peach_redirect.php";
+$redirectUrl = array("Android"=>"https://www.instamojo.com/integrations/android/redirect/","iOS"=>"https://www.instamojo.com/integrations/android/redirect/","web"=>"http://customurl.com");
 
 class InstamojoClient
 {
@@ -149,6 +149,7 @@ class InstamojoClient
 
 
 $client = new InstamojoClient(apiKey, apiSecret, salt, "api");
+$client_type = $_GET["client_type"];
 
 $params = array(
   'buyer_name' => $_GET["name"],
@@ -156,7 +157,7 @@ $params = array(
   'amount' => $_GET["amount"],
   'phone' => $_GET["phone"],
   'purpose' => $_GET["purpose"],
-  'redirect_url' => redirectUrl,
+  'redirect_url' => $redirectUrl[$client_type],
   'webhook' => notifyUrl,
 );
 echo json_encode($client->NewTransaction($params));
