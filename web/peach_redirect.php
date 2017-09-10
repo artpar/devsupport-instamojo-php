@@ -73,7 +73,7 @@ class InstamojoClient
     {
 
         if (!array_key_exists("mac", $data)) {
-            return false;
+            // return false;
         }
 
         $mac_provided = $data['mac'];  // Get the MAC from the POST data
