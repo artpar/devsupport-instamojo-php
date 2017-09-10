@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(E_STRICT);
+
 const apiKey = "undefined";
 const apiSecret = "undefined";
 const salt = "788239714ee94f2aaa5d85fc609eaa00";
