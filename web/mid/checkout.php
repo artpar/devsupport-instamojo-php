@@ -58,6 +58,7 @@ echo json_encode($response);
         // SnapToken acquired from previous step
         getToken("900", function(response){
           console.log("new token response", response);
+        response = JSON.parse(response);
         snap.pay(response.token);
         })
       };
