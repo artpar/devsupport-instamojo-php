@@ -64,3 +64,4 @@ echo json_decode($response);
     </script>
   </body>
 </html>
+<? }
