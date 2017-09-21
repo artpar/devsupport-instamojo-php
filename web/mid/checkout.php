@@ -34,12 +34,12 @@ echo json_decode($response);
   <body>
     <button id="pay-button">Pay!</button>
 <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="VT-client-uf-ZQoOkK1aVjyhc"></script>
+    <script src="https://app.midtrans.com/snap/snap.js" data-client-key="VT-client-uf-ZQoOkK1aVjyhc"></script>
     <script type="text/javascript">
 
       function getToken(amount, callback)
       {
-          var formData = new FormData(); 
+          var formData = new FormData();
           formData.append("amount", amount);
           var xmlHttp = new XMLHttpRequest();
               xmlHttp.onreadystatechange = function()
@@ -49,8 +49,8 @@ echo json_decode($response);
                       callback(xmlHttp.responseText);
                   }
               }
-              xmlHttp.open("post", "checkout.php"); 
-              xmlHttp.send(formData); 
+              xmlHttp.open("post", "checkout.php");
+              xmlHttp.send(formData);
       }
 
 
