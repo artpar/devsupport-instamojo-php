@@ -9,7 +9,6 @@ Veritrans_Config::$isSanitized = Veritrans_Config::$is3ds = true;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    echo "is post";
 
 // Required
 $transaction_details = array(
