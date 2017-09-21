@@ -26,7 +26,7 @@ $transaction = array(
 $snapToken = Veritrans_Snap::getSnapToken($transaction);
 $response = Array();
 $response["token"] = $snapToken;
-echo json_decode($response);
+echo json_encode($response);
 } else {
 ?>
 
