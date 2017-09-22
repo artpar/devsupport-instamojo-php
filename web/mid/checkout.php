@@ -39,7 +39,7 @@ echo json_encode($response);
 
       function getToken(amount, callback)
       {
-          var formData = new FormData();
+          var formData = new FormData(); 
           formData.append("amount", amount);
           var xmlHttp = new XMLHttpRequest();
               xmlHttp.onreadystatechange = function()
@@ -49,8 +49,8 @@ echo json_encode($response);
                       callback(xmlHttp.responseText);
                   }
               }
-              xmlHttp.open("post", "checkout.php");
-              xmlHttp.send(formData);
+              xmlHttp.open("post", "checkout.php"); 
+              xmlHttp.send(formData); 
       }
 
 
@@ -58,11 +58,11 @@ echo json_encode($response);
         // SnapToken acquired from previous step
         getToken("900", function(response){
           console.log("new token response", response);
-        response = JSON.parse(response);
-        snap.pay(response.token);
+  response = JSON.parse(response);  
+    snap.pay(response.token);
         })
       };
     </script>
   </body>
 </html>
-<? }
+ <? }
