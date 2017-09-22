@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     $transaction = file_get_contents('php://input');
+    $transaction = json_decode($transaction);
 
 
 $snapToken = Veritrans_Snap::getSnapToken($transaction);
