@@ -10,17 +10,9 @@ Veritrans_Config::$isSanitized = Veritrans_Config::$is3ds = true;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
-// Required
-$transaction_details = array(
-  'order_id' => rand(),
-  'gross_amount' => $_REQUEST["amount"], // no decimal allowed for creditcard
-);
 
+    $transaction = file_get_contents('php://input');
 
-// Fill transaction details
-$transaction = array(
-  'transaction_details' => $transaction_details,
-);
 
 $snapToken = Veritrans_Snap::getSnapToken($transaction);
 $response = Array();
@@ -39,7 +31,7 @@ echo json_encode($response);
 
       function getToken(amount, callback)
       {
-          var formData = new FormData(); 
+          var formData = new FormData();
           formData.append("amount", amount);
           var xmlHttp = new XMLHttpRequest();
               xmlHttp.onreadystatechange = function()
@@ -49,8 +41,8 @@ echo json_encode($response);
                       callback(xmlHttp.responseText);
                   }
               }
-              xmlHttp.open("post", "checkout.php"); 
-              xmlHttp.send(formData); 
+              xmlHttp.open("post", "checkout.php");
+              xmlHttp.send(formData);
       }
 
 
@@ -58,7 +50,7 @@ echo json_encode($response);
         // SnapToken acquired from previous step
         getToken("900", function(response){
           console.log("new token response", response);
-  response = JSON.parse(response);  
+  response = JSON.parse(response);
     snap.pay(response.token);
         })
       };
