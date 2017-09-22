@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $snapToken = Veritrans_Snap::getSnapToken($transaction);
 $response = Array();
 $response["token"] = $snapToken;
+$response['transaction_details'] = $transaction["transaction_details"];
 echo json_encode($response);
 } else {
 ?>
