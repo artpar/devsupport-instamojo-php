@@ -1,0 +1,288 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <style type="text/css" media="screen">
+        #editor {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        #main {
+            min-height: 100vh;
+        }
+
+        .icon {
+            display: none;
+        }
+
+        .hasicon {
+            position: relative;
+        }
+
+        .hasicon .icon {
+            display: none;
+            position: absolute;
+            top: 0px;
+            right: -20px;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+        }
+
+        .hasicon:hover .icon {
+            display: block;
+            z-index: 999;
+        }
+
+
+    </style>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/ace.js"></script>
+</head>
+<body style="cursor:text;" id="main">
+<button id="pay-button">Pay!</button>
+<!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="http://frozen-reef-67391.herokuapp.com/mid/checkout.php"></script>
+    <script type="text/javascript">
+function newId() {
+	var baseId = "T";
+  return baseId + '-' + Math.random().toString(16).slice(2);
+}
+      function getToken(amount, callback)
+      {
+	      var formData = {transaction_details: {gross_amount: amount, order_id:  newId() }};
+          var xmlHttp = new XMLHttpRequest();
+              xmlHttp.onreadystatechange = function()
+              {
+                  if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                  {
+                      callback(xmlHttp.responseText);
+                  }
+              }
+              xmlHttp.open("post", "http://frozen-reef-67391.herokuapp.com/mid/checkout.php");
+              xmlHttp.send(JSON.stringify(formData));
+      }
+
+
+      document.getElementById('pay-button').onclick = function(){
+        // SnapToken acquired from previous step
+        // 900 is the amount
+        getToken("900", function(response){
+          console.log("new token response", response);
+  response = JSON.parse(response);
+    snap.pay(response.token);
+        })
+      };
+    </script>
+</body>
+
+<script src="js/vendor/modernizr-3.5.0.min.js"></script>
+<script src="js/zoom.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga = function () {
+        ga.q.push(arguments)
+    };
+    ga.q = [];
+    ga.l = +new Date;
+    ga('create', 'UA-106950989-1', 'auto');
+    ga('send', 'pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+<script>
+    function addEditor() {
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/xcode");
+        editor.getSession().setMode("ace/mode/text");
+        editor.renderer.setShowGutter(false);
+    }
+
+    function getCoordinates(event) {
+        return {x: event.clientX, y: event.clientY}
+    }
+
+    function createNewDiv(config) {
+
+        if (!config.id) {
+            config.id = btoa(Math.random()).substring(0, 12);
+        }
+
+
+        var div = $("<div class='note hasicon'></div>")
+        div.attr("id", config.id);
+        div.css("width", "300px");
+        div.css("height", "170px");
+        div.css("position", "absolute");
+        div.css("top", config.coordinates.y + "px");
+        div.css("left", config.coordinates.x + "px");
+
+        if (config.content) {
+            div.text(config.content);
+        }
+
+        $("body").append(div);
+        return div
+    }
+
+    function enableEditor(div) {
+
+
+        var editor = ace.edit(div.id);
+        editor.setTheme("ace/theme/xcode");
+        editor.getSession().setMode("ace/mode/text");
+        editor.renderer.setShowGutter(false);
+        editor.setOption("indentedSoftWrap", true);
+        editor.getSession().setUseWrapMode(true);
+        $("#" + div.id).append($('<span class="icon fa fa-times" />'))
+        return editor;
+    }
+
+    var documentState = {
+        documentCoords: null,
+        notes: [
+            {
+                coordinates: {
+                    x: 200,
+                    y: 200
+                },
+                content: "Click anywhere to start taking a note\n\nClick cross to delete\n\nNotes are stored in local storage",
+                id: "default-note"
+            }
+        ],
+    };
+    var editorMap = {};
+
+    $(document).click(function (e) {
+
+        if ($(e.target).hasClass("fa")) {
+            var parentNote = $(e.target).parent().attr("id");
+            console.log('parent note', parentNote);
+            for (var i = 0; i < documentState.notes.length; i++) {
+                if (documentState.notes[i].id == parentNote) {
+                    editorMap[documentState.notes.id] = null
+                    documentState.notes.splice(i, 1);
+                    i = i - 1;
+                }
+            }
+            $("#" + parentNote).remove();
+            saveNotes();
+            return
+        }
+
+        if ($(e.target).hasClass("ace_content")) {
+            return
+        }
+
+
+        var coordinates = getCoordinates(e);
+        console.log("click at", e, coordinates);
+
+        var note = {
+            coordinates: coordinates,
+            content: ""
+        }
+
+        var newDiv = createNewDiv(note);
+
+        var editorInstance = enableEditor(note);
+        newDiv.editor = editorInstance;
+        newDiv.editor.focus();
+        newDiv.editor.on("input", saveNotes);
+        editorMap[note.id] = newDiv;
+        documentState.notes.push(note);
+
+    });
+
+    function init() {
+
+        var state = window.localStorage.getItem("state");
+        if (state) {
+            try {
+                var stateObject = JSON.parse(state);
+                var notes = stateObject.notes;
+                for (var i = 0; i < notes.length; i++) {
+                    var note = notes[i];
+                    if (editorMap[note.id]) {
+                        continue
+                    }
+                    var newDiv = createNewDiv(note);
+                    var editorInstance = enableEditor(note);
+                    newDiv.editor = editorInstance;
+                    // newDiv.editor.focus();
+                    newDiv.editor.on("input", saveNotes);
+
+                    editorMap[note.id] = newDiv;
+                    documentState.notes.push(note);
+                }
+
+            } catch (e) {
+                console.log("failed to load", e);
+            }
+        } else {
+            var notes = documentState.notes;
+            documentState.notes = [];
+            for (var i = 0; i < notes.length; i++) {
+                var note = notes[i];
+                var newDiv = createNewDiv(note);
+                var editorInstance = enableEditor(note);
+                newDiv.editor = editorInstance;
+                // newDiv.editor.focus();
+                newDiv.editor.on("input", saveNotes);
+                editorMap[note.id] = newDiv;
+                documentState.notes.push(note);
+            }
+
+
+            console.log("Nothing to load")
+        }
+    }
+
+    function saveNotes() {
+        console.log("Save everything")
+        for (var i = 0; i < documentState.notes.length; i++) {
+            if (!editorMap[documentState.notes[i].id]) {
+                documentState.notes.splice(i, 1);
+                i = i-1;
+                continue;
+            }
+            var content = editorMap[documentState.notes[i].id].editor.getValue();
+            documentState.notes[i].content = content;
+        }
+        window.localStorage.setItem("state", JSON.stringify(documentState));
+        console.log("saved ", documentState.notes.length, " notes")
+    }
+
+    init();
+
+    window.addEventListener("mousewheel", function (e) {
+        var coords = getCoordinates(e);
+        console.log("mousewheel", e, coords);
+        if (e.deltaY < 0) {
+            // zoom in
+        } else {
+            // zoom.out();
+
+        }
+    });
+
+
+</script>
+</html>
