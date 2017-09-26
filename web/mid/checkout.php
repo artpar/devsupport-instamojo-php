@@ -6,20 +6,40 @@ Veritrans_Config::$serverKey = "VT-server-jxeozomsTmDnLuRQ2ZQdeNv6";
 // Veritrans_Config::$isProduction = true;
 Veritrans_Config::$isSanitized = Veritrans_Config::$is3ds = true;
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $transaction = file_get_contents('php://input');
 
+  $curl = curl_init();
 
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://app.sandbox.midtrans.com/snap/v1/transactions",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => $transaction,
+  CURLOPT_HTTPHEADER => array(
+    "accept: application/json",
+    "authorization: Basic VlQtc2VydmVyLWp4ZW96b21zVG1Ebkx1UlEyWlFkZU52Njo=",
+    "cache-control: no-cache",
+    "content-type: application/json",
+    "postman-token: 6657b615-d58c-bb7a-8aa1-2527a839d582"
+  ),
+));
 
-    $transaction = file_get_contents('php://input');
-    $transaction = json_decode($transaction, true);
+$response = curl_exec($curl);
+$err = curl_error($curl);
 
+curl_close($curl);
 
-$snapToken = Veritrans_Snap::getSnapToken($transaction);
-$response = Array();
-$response["token"] = $snapToken;
-$response['transaction_details'] = $transaction["transaction_details"];
-echo json_encode($response);
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
+
 } else {
 ?>
 
