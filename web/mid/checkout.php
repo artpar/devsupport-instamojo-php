@@ -14,10 +14,10 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => "POST",
   CURLOPT_POSTFIELDS => $transaction,
   CURLOPT_HTTPHEADER => array(
-    "accept": "application/json",
-    "Authorization": "Basic VlQtc2VydmVyLWp4ZW96b21zVG1Ebkx1UlEyWlFkZU52Njo=", 
-"cache-control": "no-cache",
-    "content-type": "application/json"
+    "accept: application/json",
+    "Authorization: Basic VlQtc2VydmVyLWp4ZW96b21zVG1Ebkx1UlEyWlFkZU52Njo=", 
+"cache-control: no-cache",
+    "content-type: application/json"
   ),
 ));
 
