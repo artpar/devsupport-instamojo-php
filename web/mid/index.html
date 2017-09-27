@@ -110,6 +110,40 @@
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="VT-client-zqEBdN6gR8txZevh"></script>
     <script type="text/javascript">
 
+ function newId() { var baseId = 'T'; 
+ return baseId + '-' + Math.random().toString(16).slice(2); 
+ }  
+   function getToken(amount, callback)
+      {
+	   	      var formData = {transaction_details: {gross_amount: amount, order_id:  newId() }};
+              var xmlHttp = new XMLHttpRequest();
+              xmlHttp.onreadystatechange = function()
+              {
+                  if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                  {
+                      callback(xmlHttp.responseText);
+                  }
+              }
+              xmlHttp.open("post", "http://frozen-reef-67391.herokuapp.com/mid/checkout.php");
+              xmlHttp.send(JSON.stringify(formData));
+      }
+
+
+      document.getElementById('pay-button').onclick = function(){
+        // SnapToken acquired from previous step
+        // 900 is the amount
+        getToken("900", function(response){
+          console.log("new token response", response);
+  response = JSON.parse(response);
+    snap.pay(response.token);
+        })
+      };
+    </script>
+    <button id="pay-button">Pay!</button>
+<!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="VT-client-zqEBdN6gR8txZevh"></script>
+    <script type="text/javascript">
+
 
 function newId() {
       var baseId = "T";
