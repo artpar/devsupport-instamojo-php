@@ -8,6 +8,13 @@
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="VT-client-zqEBdN6gR8txZevh"></script>
     <script type="text/javascript">
 
+
+function newId() {
+      var baseId = "T";
+      return baseId + '-' + Math.random().toString(16).slice(2);
+
+}
+
       function getToken(amount, callback)
       {
 	   	      var formData = {transaction_details: {gross_amount: amount, order_id:  newId() }};
