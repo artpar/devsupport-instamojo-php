@@ -8,7 +8,13 @@ Veritrans_Config::$serverKey = 'VT-server-jxeozomsTmDnLuRQ2ZQdeNv6';
 if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
 
-$notif = new Veritrans_Notification();
+ try {
+  $notif = new Veritrans_Notification();
+} catch (Exception $e) {
+  echo "Exception: ".$e->getMessage()."\r\n";
+  echo "Notification received: ".file_get_contents("php://input");
+  exit();
+} 
 $transaction = $notif->transaction_status;
 $type = $notif->payment_type;
 $order_id = $notif->order_id;
