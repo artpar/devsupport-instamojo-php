@@ -184,12 +184,6 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
           <td><input name="udf4" value="<?php echo (empty($posted['udf4'])) ? '' : $posted['udf4']; ?>" /></td>
         </tr>
         <tr>
-          <td>UDF5: </td>
-          <td><input name="udf5" value="<?php echo (empty($posted['udf5'])) ? '' : $posted['udf5']; ?>" /></td>
-          <td>PG: </td>
-          <td><input name="pg" value="<?php echo (empty($posted['pg'])) ? '' : $posted['pg']; ?>" /></td>
-        </tr>
-        <tr>
           <?php if(!$hash) { ?>
             <td colspan="4"><input type="submit" value="Submit" /></td>
           <?php } ?>
