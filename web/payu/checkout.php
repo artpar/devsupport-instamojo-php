@@ -125,9 +125,49 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
         </tr>
         <tr>
           <td>pg: </td>
-          <td><input name="pg" value="<?php echo (empty($posted['pg'])) ? '' : $posted['pg'] ?>" /></td>
+          <td>
+            <select name="pg">
+              <option value="CC">Credit Card</option>
+              <option value="DC">Debit Card</option>
+              <option value="CASH">Cash</option>
+              <option value="EMI">EMI</option>
+              <option value="NB">Net banking</option>
+              </select>
+          </td>
           <td>bankcode: </td>
-          <td><input name="bankcode" id="bankcode" value="<?php echo (empty($posted['bankcode'])) ? '' : $posted['bankcode']; ?>" /></td>
+          <td>
+            <input name="bankcode" id="bankcode" value="<?php echo (empty($posted['bankcode'])) ? 
+            '' : $posted['bankcode']; ?>" />
+
+            <select name="bankcode">
+              <option value="162B">162 Bank</option>
+<option value="AXIB">Axis Bank</option>
+<option value="BOIB">Bank of India</option>
+<option value="CABB">CAB</option>
+<option value="CBIB">Central bank of India</option>
+<option value="CITNB">Citi Bank</option>
+<option value="DSHB">DSHB</option>
+<option value="ICIB">ICICI Bank</option>
+<option value="INIB">INI Bank</option>
+<option value="JAKB">Jammu and Kashmir Bank</option>
+<option value="KRKB">KRK Bank</option>
+<option value="KRVB">Karur Vysasya Bank</option>
+<option value="PNBB">Punjab National Bank</option>
+<option value="SBBJB">SBB JB</option>
+<option value="SBIB">State Bank Of India</option>
+<option value="SBTB">State Bank of Travancore</option>
+<option value="SOIB">SOI Bank</option>
+<option value="UBIB">UBI Bank</option>
+<option value="UNIB">Union Bank of India</option>
+<option value="VJYB">Vijaya Bank</option>
+<option value="YESB">Yes Bank</option>
+              </select>
+
+
+          </td>
+        </tr><tr>
+          <td>ccname: </td>
+          <td><input name="ccname" value="<?php echo (empty($posted['ccname'])) ? '' : $posted['ccname'] ?>" /></td>
         </tr>
         <tr>
           <td>ccnum: </td>
