@@ -127,40 +127,43 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
           <td>pg: </td>
           <td>
             <select name="pg">
-              <option value="CC">Credit Card</option>
-              <option value="DC">Debit Card</option>
-              <option value="CASH">Cash</option>
-              <option value="EMI">EMI</option>
-              <option value="NB">Net banking</option>
+
+
+                <option  <?php echo ($posted['pg'] == 'CC') ? 'selected' : '' ?> value="CC">Credit Card</option>
+              <option  <?php echo ($posted['pg'] == 'DC') ? 'selected' : '' ?> value="DC">Debit Card</option>
+              <option  <?php echo ($posted['pg'] == 'CASH') ? 'selected' : '' ?> value="CASH">Cash</option>
+              <option  <?php echo ($posted['pg'] == 'EMI') ? 'selected' : '' ?> value="EMI">EMI</option>
+              <option  <?php echo ($posted['pg'] == 'NB') ? 'selected' : '' ?> value="NB">Net banking</option>
+
+
               </select>
           </td>
           <td>bankcode: </td>
           <td>
-            <input name="bankcode" id="bankcode" value="<?php echo (empty($posted['bankcode'])) ? 
-            '' : $posted['bankcode']; ?>" />
-
             <select name="bankcode">
-              <option value="162B">162 Bank</option>
-<option value="AXIB">Axis Bank</option>
-<option value="BOIB">Bank of India</option>
-<option value="CABB">CAB</option>
-<option value="CBIB">Central bank of India</option>
-<option value="CITNB">Citi Bank</option>
-<option value="DSHB">DSHB</option>
-<option value="ICIB">ICICI Bank</option>
-<option value="INIB">INI Bank</option>
-<option value="JAKB">Jammu and Kashmir Bank</option>
-<option value="KRKB">KRK Bank</option>
-<option value="KRVB">Karur Vysasya Bank</option>
-<option value="PNBB">Punjab National Bank</option>
-<option value="SBBJB">SBB JB</option>
-<option value="SBIB">State Bank Of India</option>
-<option value="SBTB">State Bank of Travancore</option>
-<option value="SOIB">SOI Bank</option>
-<option value="UBIB">UBI Bank</option>
-<option value="UNIB">Union Bank of India</option>
-<option value="VJYB">Vijaya Bank</option>
-<option value="YESB">Yes Bank</option>
+
+<option  <?php echo ($posted['bankcode'] == '162B') ? 'selected' : '' ?> value="162B">162 Bank</option>
+<option  <?php echo ($posted['bankcode'] == 'AXIB') ? 'selected' : '' ?> value="AXIB">Axis Bank</option>
+<option  <?php echo ($posted['bankcode'] == 'BOIB') ? 'selected' : '' ?> value="BOIB">Bank of India</option>
+<option  <?php echo ($posted['bankcode'] == 'CABB') ? 'selected' : '' ?> value="CABB">CAB</option>
+<option  <?php echo ($posted['bankcode'] == 'CBIB') ? 'selected' : '' ?> value="CBIB">Central bank of India</option>
+<option  <?php echo ($posted['bankcode'] == 'CITNB') ? 'selected' : '' ?> value="CITNB">Citi Bank</option>
+<option  <?php echo ($posted['bankcode'] == 'DSHB') ? 'selected' : '' ?> value="DSHB">DSHB</option>
+<option  <?php echo ($posted['bankcode'] == 'ICIB') ? 'selected' : '' ?> value="ICIB">ICICI Bank</option>
+<option  <?php echo ($posted['bankcode'] == 'INIB') ? 'selected' : '' ?> value="INIB">INI Bank</option>
+<option  <?php echo ($posted['bankcode'] == 'JAKB') ? 'selected' : '' ?> value="JAKB">Jammu and Kashmir Bank</option>
+<option  <?php echo ($posted['bankcode'] == 'KRKB') ? 'selected' : '' ?> value="KRKB">KRK Bank</option>
+<option  <?php echo ($posted['bankcode'] == 'KRVB') ? 'selected' : '' ?> value="KRVB">Karur Vysasya Bank</option>
+<option  <?php echo ($posted['bankcode'] == 'PNBB') ? 'selected' : '' ?> value="PNBB">Punjab National Bank</option>
+<option  <?php echo ($posted['bankcode'] == 'SBBJB') ? 'selected' : '' ?> value="SBBJB">SBB JB</option>
+<option  <?php echo ($posted['bankcode'] == 'SBIB') ? 'selected' : '' ?> value="SBIB">State Bank Of India</option>
+<option  <?php echo ($posted['bankcode'] == 'SBTB') ? 'selected' : '' ?> value="SBTB">State Bank of Travancore</option>
+<option  <?php echo ($posted['bankcode'] == 'SOIB') ? 'selected' : '' ?> value="SOIB">SOI Bank</option>
+<option  <?php echo ($posted['bankcode'] == 'UBIB') ? 'selected' : '' ?> value="UBIB">UBI Bank</option>
+<option  <?php echo ($posted['bankcode'] == 'UNIB') ? 'selected' : '' ?> value="UNIB">Union Bank of India</option>
+<option  <?php echo ($posted['bankcode'] == 'VJYB') ? 'selected' : '' ?> value="VJYB">Vijaya Bank</option>
+<option  <?php echo ($posted['bankcode'] == 'YESB') ? 'selected' : '' ?> value="YESB">Yes Bank</option>
+
               </select>
 
 
