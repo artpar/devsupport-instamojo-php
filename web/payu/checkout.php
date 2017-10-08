@@ -80,8 +80,8 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
       <input type="hidden" name="hash" value="<?php echo $hash ?>"/>
       <input type="hidden" name="txnid" value="<?php echo $txnid ?>" />
   
-     <input type="hidden" name="surl" value="null" />   <!--Please change this parameter value with your success page absolute url like http://mywebsite.com/response.php. -->
-    <input type="hidden" name="furl" value="null" /><!--Please change this parameter value with your failure page absolute url like http://mywebsite.com/response.php. -->
+     <input type="hidden" name="surl" value="http://frozen-reef-67391.herokuapp.com/payu/response.php" />   <!--Please change this parameter value with your success page absolute url like http://mywebsite.com/response.php. -->
+    <input type="hidden" name="furl" value="http://frozen-reef-67391.herokuapp.com/payu/response.php" /><!--Please change this parameter value with your failure page absolute url like http://mywebsite.com/response.php. -->
    
       <table>
         <tr>
