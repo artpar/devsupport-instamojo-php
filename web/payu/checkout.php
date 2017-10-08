@@ -4,9 +4,12 @@ $MERCHANT_KEY = "gtKFFx"; //Please change this value with live key for productio
    $hash_string = '';
 // Merchant Salt as provided by Payu
 $SALT = "eCwWELxi";    //Please change this value with live salt for production
+
 // End point - change to https://secure.payu.in for LIVE mode
 $PAYU_BASE_URL = "https://test.payu.in";
+
 $action = '';
+
 $posted = array();
 if(!empty($_POST)) {
     //print_r($_POST);
@@ -15,7 +18,9 @@ if(!empty($_POST)) {
  
   }
 }
+
 $formError = 0;
+
 if(empty($posted['txnid'])) {
    // Generate random transaction id
   $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
@@ -34,6 +39,13 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
           || empty($posted['email'])
           || empty($posted['phone'])
           || empty($posted['productinfo'])
+          || empty($posted['pg'])
+          || empty($posted['bankcode'])
+          || empty($posted['ccnum'])
+          || empty($posted['ccname'])
+          || empty($posted['ccvv'])
+          || empty($posted['ccexpmon'])
+          || empty($posted['ccexpyr'])
          
   ) {
     $formError = 1;
@@ -45,7 +57,10 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
       $hash_string .= isset($posted[$hash_var]) ? $posted[$hash_var] : '';
       $hash_string .= '|';
     }
+
     $hash_string .= $SALT;
+
+
     $hash = strtolower(hash('sha512', $hash_string));
     $action = $PAYU_BASE_URL . '/_payment';
   }
@@ -68,7 +83,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
   </script>
   </head>
   <body onload="submitPayuForm()">
-    <h2>PayU Form</h2>
+    <h2>PayU Seamless integration</h2>
     <br/>
     <?php if($formError) { ?>
       <span style="color:red">Please fill all mandatory fields.</span>
@@ -105,7 +120,29 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
         </tr>
         
 
-        
+         <tr>
+          <td><b>Payment Details</b></td>
+        </tr>
+        <tr>
+          <td>pg: </td>
+          <td><input name="pg" value="<?php echo (empty($posted['pg'])) ? '' : $posted['pg'] ?>" /></td>
+          <td>bankcode: </td>
+          <td><input name="bankcode" id="bankcode" value="<?php echo (empty($posted['bankcode'])) ? '' : $posted['bankcode']; ?>" /></td>
+        </tr>
+        <tr>
+          <td>ccnum: </td>
+          <td><input name="ccnum" id="ccnum" value="<?php echo (empty($posted['ccnum'])) ? '' : $posted['ccnum']; ?>" /></td>
+          <td>ccvv: </td>
+          <td><input name="ccvv" value="<?php echo (empty($posted['ccvv'])) ? '' : $posted['ccvv']; ?>" /></td>
+        </tr>
+        <tr>
+          <td>ccexpmon: </td>
+          <td><input name="ccexpmon" id="ccexpmon" value="<?php echo (empty($posted['ccexpmon'])) ? '' : $posted['ccexpmon']; ?>" /></td>
+          <td>ccexpyr: </td>
+          <td><input name="ccexpyr" value="<?php echo (empty($posted['ccexpyr'])) ? '' : $posted['ccexpyr']; ?>" /></td>
+        </tr>
+
+         
 
         <tr>
           <td><b>Optional Parameters</b></td>
