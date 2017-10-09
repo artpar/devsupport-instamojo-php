@@ -4,12 +4,9 @@ $MERCHANT_KEY = "gtKFFx"; //Please change this value with live key for productio
    $hash_string = '';
 // Merchant Salt as provided by Payu
 $SALT = "eCwWELxi";    //Please change this value with live salt for production
-
 // End point - change to https://secure.payu.in for LIVE mode
 $PAYU_BASE_URL = "https://test.payu.in";
-
 $action = '';
-
 $posted = array();
 if(!empty($_POST)) {
     //print_r($_POST);
@@ -18,9 +15,7 @@ if(!empty($_POST)) {
  
   }
 }
-
 $formError = 0;
-
 if(empty($posted['txnid'])) {
    // Generate random transaction id
   $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
@@ -39,13 +34,6 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
           || empty($posted['email'])
           || empty($posted['phone'])
           || empty($posted['productinfo'])
-          || empty($posted['pg'])
-          || empty($posted['bankcode'])
-          || empty($posted['ccnum'])
-          || empty($posted['ccname'])
-          || empty($posted['ccvv'])
-          || empty($posted['ccexpmon'])
-          || empty($posted['ccexpyr'])
          
   ) {
     $formError = 1;
@@ -57,10 +45,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
       $hash_string .= isset($posted[$hash_var]) ? $posted[$hash_var] : '';
       $hash_string .= '|';
     }
-
     $hash_string .= $SALT;
-
-
     $hash = strtolower(hash('sha512', $hash_string));
     $action = $PAYU_BASE_URL . '/_payment';
   }
@@ -83,7 +68,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
   </script>
   </head>
   <body onload="submitPayuForm()">
-    <h2>PayU Seamless integration</h2>
+    <h2>PayU Form</h2>
     <br/>
     <?php if($formError) { ?>
       <span style="color:red">Please fill all mandatory fields.</span>
@@ -120,72 +105,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
         </tr>
         
 
-         <tr>
-          <td><b>Payment Details</b></td>
-        </tr>
-        <tr>
-          <td>pg: </td>
-          <td>
-            <select name="pg">
-
-
-                <option  <?php echo ($posted['pg'] == 'CC') ? 'selected' : '' ?> value="CC">Credit Card</option>
-              <option  <?php echo ($posted['pg'] == 'DC') ? 'selected' : '' ?> value="DC">Debit Card</option>
-              <option  <?php echo ($posted['pg'] == 'CASH') ? 'selected' : '' ?> value="CASH">Cash</option>
-              <option  <?php echo ($posted['pg'] == 'EMI') ? 'selected' : '' ?> value="EMI">EMI</option>
-              <option  <?php echo ($posted['pg'] == 'NB') ? 'selected' : '' ?> value="NB">Net banking</option>
-
-
-              </select>
-          </td>
-          <td>bankcode: </td>
-          <td>
-            <select name="bankcode">
-
-<option  <?php echo ($posted['bankcode'] == '162B') ? 'selected' : '' ?> value="162B">162 Bank</option>
-<option  <?php echo ($posted['bankcode'] == 'AXIB') ? 'selected' : '' ?> value="AXIB">Axis Bank</option>
-<option  <?php echo ($posted['bankcode'] == 'BOIB') ? 'selected' : '' ?> value="BOIB">Bank of India</option>
-<option  <?php echo ($posted['bankcode'] == 'CABB') ? 'selected' : '' ?> value="CABB">CAB</option>
-<option  <?php echo ($posted['bankcode'] == 'CBIB') ? 'selected' : '' ?> value="CBIB">Central bank of India</option>
-<option  <?php echo ($posted['bankcode'] == 'CITNB') ? 'selected' : '' ?> value="CITNB">Citi Bank</option>
-<option  <?php echo ($posted['bankcode'] == 'DSHB') ? 'selected' : '' ?> value="DSHB">DSHB</option>
-<option  <?php echo ($posted['bankcode'] == 'ICIB') ? 'selected' : '' ?> value="ICIB">ICICI Bank</option>
-<option  <?php echo ($posted['bankcode'] == 'INIB') ? 'selected' : '' ?> value="INIB">INI Bank</option>
-<option  <?php echo ($posted['bankcode'] == 'JAKB') ? 'selected' : '' ?> value="JAKB">Jammu and Kashmir Bank</option>
-<option  <?php echo ($posted['bankcode'] == 'KRKB') ? 'selected' : '' ?> value="KRKB">KRK Bank</option>
-<option  <?php echo ($posted['bankcode'] == 'KRVB') ? 'selected' : '' ?> value="KRVB">Karur Vysasya Bank</option>
-<option  <?php echo ($posted['bankcode'] == 'PNBB') ? 'selected' : '' ?> value="PNBB">Punjab National Bank</option>
-<option  <?php echo ($posted['bankcode'] == 'SBBJB') ? 'selected' : '' ?> value="SBBJB">SBB JB</option>
-<option  <?php echo ($posted['bankcode'] == 'SBIB') ? 'selected' : '' ?> value="SBIB">State Bank Of India</option>
-<option  <?php echo ($posted['bankcode'] == 'SBTB') ? 'selected' : '' ?> value="SBTB">State Bank of Travancore</option>
-<option  <?php echo ($posted['bankcode'] == 'SOIB') ? 'selected' : '' ?> value="SOIB">SOI Bank</option>
-<option  <?php echo ($posted['bankcode'] == 'UBIB') ? 'selected' : '' ?> value="UBIB">UBI Bank</option>
-<option  <?php echo ($posted['bankcode'] == 'UNIB') ? 'selected' : '' ?> value="UNIB">Union Bank of India</option>
-<option  <?php echo ($posted['bankcode'] == 'VJYB') ? 'selected' : '' ?> value="VJYB">Vijaya Bank</option>
-<option  <?php echo ($posted['bankcode'] == 'YESB') ? 'selected' : '' ?> value="YESB">Yes Bank</option>
-
-              </select>
-
-
-          </td>
-        </tr><tr>
-          <td>ccname: </td>
-          <td><input name="ccname" value="<?php echo (empty($posted['ccname'])) ? '' : $posted['ccname'] ?>" /></td>
-        </tr>
-        <tr>
-          <td>ccnum: </td>
-          <td><input name="ccnum" id="ccnum" value="<?php echo (empty($posted['ccnum'])) ? '' : $posted['ccnum']; ?>" /></td>
-          <td>ccvv: </td>
-          <td><input name="ccvv" value="<?php echo (empty($posted['ccvv'])) ? '' : $posted['ccvv']; ?>" /></td>
-        </tr>
-        <tr>
-          <td>ccexpmon: </td>
-          <td><input name="ccexpmon" id="ccexpmon" value="<?php echo (empty($posted['ccexpmon'])) ? '' : $posted['ccexpmon']; ?>" /></td>
-          <td>ccexpyr: </td>
-          <td><input name="ccexpyr" value="<?php echo (empty($posted['ccexpyr'])) ? '' : $posted['ccexpyr']; ?>" /></td>
-        </tr>
-
-         
+        
 
         <tr>
           <td><b>Optional Parameters</b></td>
@@ -225,6 +145,12 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
           <td><input name="udf3" value="<?php echo (empty($posted['udf3'])) ? '' : $posted['udf3']; ?>" /></td>
           <td>UDF4: </td>
           <td><input name="udf4" value="<?php echo (empty($posted['udf4'])) ? '' : $posted['udf4']; ?>" /></td>
+        </tr>
+        <tr>
+          <td>UDF5: </td>
+          <td><input name="udf5" value="<?php echo (empty($posted['udf5'])) ? '' : $posted['udf5']; ?>" /></td>
+          <td>PG: </td>
+          <td><input name="pg" value="<?php echo (empty($posted['pg'])) ? '' : $posted['pg']; ?>" /></td>
         </tr>
         <tr>
           <?php if(!$hash) { ?>
